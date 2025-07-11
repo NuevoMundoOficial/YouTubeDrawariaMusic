@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTubeDrawaria Music | Sitio Web Oficial</title>
+    <style>
+        /* --- FUENTES Y ESTILOS GENERALES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+
+        :root {
+            --color-primary: #3a0ca3;
+            --color-secondary: #f72585;
+            --color-background: #121212;
+            --color-surface: #1e1e1e;
+            --color-text: #ffffff;
+            --color-text-muted: #a9a9a9;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        .navbar {
+            background-color: rgba(30, 30, 30, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--color-secondary);
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            padding: 100px 5%;
+            border-bottom: 1px solid var(--color-surface);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- HERO (INICIO) --- */
+        #home {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/gLp6Wdqc/image.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        #home h1 {
+            font-size: 4rem;
+            margin: 0;
+            font-weight: 900;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            color: var(--color-text-muted);
+            margin-top: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 15px 30px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--color-secondary);
+        }
+
+        /* --- ACERCA DE --- */
+        #about .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        #about .profile-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--color-primary);
+        }
+        
+        #about .bio {
+            flex: 1;
+        }
+
+        /* --- MÚSICA --- */
+        #music .music-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .music-embed {
+            border-radius: 12px;
+            border: 0;
+            width: 100%;
+        }
+
+        /* --- VIDEOCLIPS --- */
+        #videos .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background-color: var(--color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .video-embed {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        .video-card h3 {
+            padding: 15px;
+            margin: 0;
+            text-align: center;
+            background-color: rgba(0,0,0,0.3);
+        }
+        
+        /* --- GALERÍA --- */
+        #gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        #gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        #gallery img:hover {
+            transform: scale(1.05);
+        }
+
+
+        /* --- CONTACTO Y REDES --- */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            color: var(--color-text-muted);
+        }
+
+        .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0;
+        }
+
+        .social-icons li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        .social-icons a {
+            font-size: 2rem;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--color-secondary);
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--color-surface);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 1rem;
+            }
+            #home h1 { font-size: 2.5rem; }
+            #home p { font-size: 1.2rem; }
+            #about .container { flex-direction: column; text-align: center; }
+            #videos .videos-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+    <!-- Font Awesome para los iconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Menú de Navegación -->
+    <nav class="navbar">
+        <a href="#home" class="nav-brand">YouTubeDrawaria<span>Music</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">Acerca de</a></li>
+            <li><a href="#music">Música</a></li>
+            <li><a href="#videos">Videoclips</a></li>
+            <li><a href="#gallery">Galería</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de Inicio (Hero) -->
+    <section id="home">
+        <img src="https://i.ibb.co/99Cw44SL/image.png" alt="Drawaria Emoji" style="width: 150px; border-radius: 50%; margin-bottom: 20px;">
+        <h1>YOUTUBE DRAWARIA MUSIC</h1>
+        <p>El universo sonoro donde los emojis, el rap y la Musica de Drawaria cobran vida.</p>
+        <a href="#music" class="cta-button">Escucha Ahora</a>
+    </section>
+
+    <!-- Sección Acerca de -->
+    <section id="about">
+        <h2 class="section-title">Acerca de Mí</h2>
+        <div class="container">
+            <img src="https://i.ibb.co/99Cw44SL/image.png" alt="Foto de perfil de Drawaria Music" class="profile-pic">
+            <div class="bio">
+                <h3>El Artista detrás de los Emojis</h3>
+                <p><strong>YouTubeDrawaria Music</strong> es un proyecto artístico y musical innovador que fusiona la cultura digital de los emojis con paisajes sonoros urbanos y experimentales. Nacido de la pasión por la animación ("YouTubeDrawaria") y mi juego favorito ("Drawaria.online"), este proyecto utiliza personajes icónicos para contar historias a través de ritmos potentes y letras que conectan con la cultura de internet.</p>
+                <p>Explorando desde el rap hasta géneros más melódicos, y sin miedo a experimentar con herramientas de inteligencia artificial como Riffusion, mi música busca ser un reflejo del mundo digital actual. Cada canción es una pieza audiovisual única, diseñada para ser tanto escuchada como vista, creando una experiencia inmersiva para fans y nuevos oyentes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Música -->
+    <section id="music">
+        <h2 class="section-title">Música Destacada</h2>
+        <div class="music-container">
+            <div>
+                <h3>Playlist Oficial en YouTube</h3>
+                <p style="text-align:center; color: var(--color-text-muted);">Aquí encontrarás toda mi discografía disponible en YouTube, lista para escuchar.</p>
+                <iframe class="music-embed" src="https://www.youtube.com/embed/videoseries?list=PLKAw1E-pLyNljb-_czJmlQ5Gdw-jFA2pl" title="YouTube video player" height="380" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Videoclips -->
+    <section id="videos">
+        <h2 class="section-title">Videoclips Oficiales</h2>
+        <div class="videos-grid">
+            <!-- Video 1: Still High -->
+            <div class="video-card">
+                <iframe class="video-embed" src="https://www.youtube.com/embed/JZqdJs61cMQ" title="Still High (Official Video)"></iframe>
+                <h3>Still High (Official Video) | ft. Chasity</h3>
+            </div>
+            <!-- Video 2: Drawaria Rap -->
+            <div class="video-card">
+                <iframe class="video-embed" src="https://www.youtube.com/embed/eK--EzVVBo4" title="Drawaria Rap (Official Video)"></iframe>
+                <h3>Drawaria Rap (Official Video) | Special 1000 Subscribers</h3>
+            </div>
+            <!-- Video 3: Never Say Goodbye -->
+            <div class="video-card">
+                <iframe class="video-embed" src="https://www.youtube.com/embed/7j-LnRzhYPs" title="Never Say Goodbye (Official Video)"></iframe>
+                <h3>Never Say Goodbye (Official Video) | Special 950 Subscribers</h3>
+            </div>
+             <!-- Video 4: Diamonds -->
+            <div class="video-card">
+                <iframe class="video-embed" src="https://www.youtube.com/embed/5NKmWcUuq1o" title="Diamonds (Official Music Video)"></iframe>
+                <h3>Diamonds (Official Music Video) Ft. @DipsanDhimalNepali</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Galería -->
+    <section id="gallery">
+        <h2 class="section-title">Galería</h2>
+        <div class="gallery-grid">
+            <img src="https://i.ibb.co/gLp6Wdqc/image.png" alt="Banner de YouTubeDrawaria Music">
+            <img src="https://i.ibb.co/99Cw44SL/image.png" alt="Logo Emoji Drawaria Music">
+            <img src="https://i.ibb.co/WvrzPssw/image.png" alt="Captura de videos musicales">
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact">
+        <h2 class="section-title">Contacto y Redes</h2>
+        <p>Para contrataciones (booking), prensa, colaboraciones o cualquier consulta profesional, no dudes en escribirme. ¡Conectemos!</p>
+        <a href="mailto:talking9tom@gmail.com" class="cta-button">Enviar un Correo</a>
+        <ul class="social-icons">
+            <li><a href="https://www.youtube.com/@YouTubeDrawaria" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://open.spotify.com/user/317ccouaunsmpxqtnbtl2sepbycy" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a></li>
+            <!-- Agrega aquí más redes sociales si las tienes -->
+            <!-- Ejemplo: <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li> -->
+            <!-- Ejemplo: <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li> -->
+        </ul>
+        <p>También puedes explorar mis demos y experimentos con IA en Riffusion:</p>
+         <a href="https://www.riffusion.com/YouTubeDrawaria" target="_blank" class="cta-button" style="background: #1DB954;">Visitar Riffusion</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 YouTubeDrawaria Music. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
